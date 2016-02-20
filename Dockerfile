@@ -23,14 +23,15 @@ VOLUME /usr/local/openldap/etc/openldap/
 VOLUME /usr/local/openldap/var/
 
 COPY run.sh /
+COPY init_config.sh /
 RUN chmod +x /run.sh
+RUN chmod +x /init_config.sh
 CMD /run.sh
 
-
+EXPOSE 389
+EXPOSE 636
 #yum install openldap-ltb
 
-COPY init_config.sh /
-RUN chmod +x /init_config.sh
 
 
 
