@@ -13,7 +13,7 @@ CONFIG_ROOTPW="${CONFIG_ROOTPW:-password}"
 CONFIG_ROOTPW_ENCRYPTED="$($SLAPPASSWD -h '{SSHA}' -s $CONFIG_ROOTPW)"
 
 
-BASE_DN="${BASE_DN:-dc=example,dc=com}"
+
 
 DATA_PATH="${DATA_PATH:-/usr/local/openldap/var/openldap-data}"
 
@@ -45,18 +45,11 @@ EOF
   chown ldap:ldap "$DATA_PATH"
 fi
 
-echo "##"
-cat /tmp/config.ldif
-echo "##"
-
 rm -rf "$SLAPD_D_PATH"/*
-mkdir "$SLAPD_D_PATH"
+mkdir -p "$SLAPD_D_PATH"
 "$SLAPADD" -n0 -F "$SLAPD_D_PATH" -l /tmp/config.ldif
 chown -R ldap:ldap "$SLAPD_D_PATH"
 
-find "$SLAPD_D_PATH"
-
 rm /tmp/config.ldif
-cat /usr/local/openldap/etc/openldap/slapd.d/cn=config/olcDatabase=*
 
 
