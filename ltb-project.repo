@@ -1,0 +1,13 @@
+[ltb-project]
+name=LTB project packages
+baseurl=http://ltb-project.org/rpm/$releasever/$basearch
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-LTB-project
+
+[ltb-project-srpms]
+name=LTB project packages
+baseurl=http://ltb-project.org/rpm/$releasever/SRPMS
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-LTB-project
