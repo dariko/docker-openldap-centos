@@ -1,3 +1,16 @@
-openldap:
-  build: .
-  
+version: "2"
+services:
+  openldap:
+    build: .
+    ports:
+      - "389"
+    environment:
+      INIT_CONFIG: "y"    ## initializes config in /usr/local/openldap/etc/slapd.d (volume)
+                          ## with the following options
+      LOGLEVEL: "-1"       ## openldap log level
+      #CONFIG_ROOTDN: "cn=config"
+      #CONFIG_ROOTPW: "password"
+      #BASE_DN:           ## optional base dn for olcDatabase{1}
+      #DATA_PATH:         ## optional olcDatabase{1} files path, default to
+                          ## /usr/local/openldap/var/openldap-data (volume)
+      
