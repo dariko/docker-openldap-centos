@@ -15,11 +15,12 @@ do
 done
 
 pid_file=$(sed -n 's/^olcpidfile: \(.*\)$/\1/pI' /tmp/config.ldif)
-pid_dir="$(dirname $pid_file)"
-rm -rf "$pid_file"
-mkdir -p "$pid_dir"
-chown -R ldap:ldap "$pid_dir"
-
+if [ ! -z "$pid_file" ];then 
+  pid_dir="$(dirname $pid_file)"
+  rm -rf "$pid_file"
+  mkdir -p "$pid_dir"
+  chown -R ldap:ldap "$pid_dir"
+fi
 rm -rf "$CONFIG_PATH"/*
 
 "$SLAPADD" -n0 -F "$CONFIG_PATH" -l /tmp/config.ldif
