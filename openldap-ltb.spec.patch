@@ -1,0 +1,18 @@
+--- openldap-ltb.spec.orig	2018-09-23 12:37:13.018751659 +0200
++++ openldap-ltb.spec	2018-09-23 12:38:37.478474418 +0200
+@@ -80,6 +80,7 @@
+ # Sources available on https://github.com/ltb-project/ppm
+ Source6: %{ppm_name}-%{ppm_version}.tar.gz
+ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
++Patch0: accesslog_addConnectionInformation.patch
+ 
+ BuildRequires: gcc, make, groff
+ BuildRequires: openssl-devel, cyrus-sasl-devel, berkeleydb-ltb >= 4.6.21, libtool-ltdl-devel
+@@ -200,6 +201,7 @@
+ %setup -n %{real_name}-%{real_version} -T -D -a 1
+ %setup -n %{real_name}-%{real_version} -T -D -a 2
+ %setup -n %{real_name}-%{real_version} -T -D -a 6
++%patch0 -p1
+ 
+ #=================================================
+ # Building
