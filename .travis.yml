@@ -1,0 +1,28 @@
+---
+language: generic
+python: "2.7"
+
+services:
+-   docker
+
+install: []
+
+script:
+-   docker build -t docker-openldap-centos .
+-   docker rm -f openldap || true
+-   |
+    docker run -d \
+        --name openldap \
+        --env  INIT_CONFIG=y \
+        docker-openldap-centos
+# give run.sh time to initialize the openldap configuration
+-  sleep 2
+-   |
+    docker exec -it openldap \
+        /usr/local/openldap/bin/ldapsearch \
+            -H ldap://localhost \
+            -D cn=config \
+            -w password \
+            -b cn=config \
+            -s base \
+            -LLL cn=config dn | grep ^"dn: cn=config"
